@@ -8,13 +8,16 @@ export default class ShopPage extends Component {
         this.state ={
             collection: SHOP_DATA
         }
-        //console.log(this.props);
+        //console.log(this.state);
     }
     render() {
+        const {collection} = this.state;
         return (
-            <div>
+            <div className='shop-page'>
                 <h1>SHOP PAGE</h1>
-                <PreviewCollection {...this.state}/>
+                {collection.map(item => 
+                    <PreviewCollection key={item.id} {...item}/>
+                )}
             </div>
         )
     }
