@@ -1,9 +1,0 @@
-{
-    "version": 3,
-    "mappings": "AAAA,AAAA,QAAQ,CAAC;EACL,SAAS,EAAE,GAAG;CACjB",
-    "sources": [
-        "sign-in.style.scss"
-    ],
-    "names": [],
-    "file": "sign-in.style.css"
-}
