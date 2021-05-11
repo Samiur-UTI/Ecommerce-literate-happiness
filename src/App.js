@@ -4,14 +4,14 @@ import ShopPage from './pages/shop/shop.component';
 import {Switch,Route} from 'react-router-dom';
 import Header from './components/header/header.component';
 import SignInAndSignUp from '../src/pages/sign-in-sign-up/sign-in-sign-up.component';
-import {auth} from './firebase/firebase.utils';
+import {auth,createUserProfileDocument} from './firebase/firebase.utils';
 import { useState,useEffect } from 'react';
 function App() {
   const [loggedIn, setloggedIn] = useState({currentUser:null});
   useEffect(() => {
-    auth.onAuthStateChanged(user => {
+    auth.onAuthStateChanged( async user => {
       setloggedIn({currentUser:user})
-      console.log(user);
+      createUserProfileDocument(user)
     })
   }, [])  
   return (
@@ -20,7 +20,7 @@ function App() {
       <Switch>
         <Route exact path='/' component = {Homepage} />
         <Route exact path='/shop' component = {ShopPage} />
-        <Route exact path='/signin' component = {SignInAndSignUp  } />
+        <Route exact path='/signin' component = {SignInAndSignUp} />
       </Switch>
     </div>
   );
