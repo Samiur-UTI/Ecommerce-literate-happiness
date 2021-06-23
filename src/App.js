@@ -8,12 +8,25 @@ import {auth,createUserProfileDocument} from './firebase/firebase.utils';
 import { useState,useEffect } from 'react';
 function App() {
   const [loggedIn, setloggedIn] = useState({currentUser:null});
+  console.log(loggedIn);
   useEffect(() => {
-    auth.onAuthStateChanged( async user => {
-      setloggedIn({currentUser:user})
-      createUserProfileDocument(user)
+    auth.onAuthStateChanged( async userAuth => {
+      if(userAuth){
+        const userRef = createUserProfileDocument(userAuth);
+        (await userRef).onSnapshot(snapShot => {
+          setloggedIn({
+            currentUser:{
+              id: snapShot.id,
+              ...snapShot.data()
+            }
+          })
+        })
+      }
+      else {
+        setloggedIn({currentUser:userAuth})
+      }
     })
-  }, [])  
+  },[])  
   return (
     <div>
       <Header {...loggedIn}/>
