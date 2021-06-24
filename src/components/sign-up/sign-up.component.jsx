@@ -10,7 +10,7 @@ export default function SignUp() {
         password: '',
         confirmPassword: ''
     })
-    async function handleSubmit (event) {
+    const handleSubmit = async (event) => {
         event.preventDefault()
         console.log(event.target)
         const {displayName, email, password, confirmPassword} = userDetails
@@ -33,9 +33,12 @@ export default function SignUp() {
         }
 
     }
-    function handleChange (event) {
+    const handleChange =(event) => {
         const {name, value} = event.target
-        setuserDetails({[name] : value})
+        setuserDetails({
+            ...userDetails,
+            [name] : value
+        })
     }
     const {displayName, email, password, confirmPassword} = userDetails
     return (

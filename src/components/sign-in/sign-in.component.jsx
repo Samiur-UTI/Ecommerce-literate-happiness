@@ -14,10 +14,12 @@ export default class SignIn extends Component {
     }
     handleSubmit = (e) => {
         e.preventDefault();
+        console.log(e)
     }
     handleChange = (event) => {
         const {name,value} = event.target;
         this.setState({
+            ...this.state,
             [name] : value
         })
     }
